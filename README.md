@@ -1,1 +1,4 @@
-# VUE前端项目
+# VUE Front-End Project Scaffolding
+## Branch Introduction
+#### main : Scaffolding
+#### dev(TODO): Business 
