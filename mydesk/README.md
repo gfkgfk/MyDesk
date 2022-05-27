@@ -60,6 +60,8 @@ src/views/main
 //TODO:
 axios
 mockjs
+vuex
+ui
 
 ```
 
