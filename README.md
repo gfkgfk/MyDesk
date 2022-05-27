@@ -1,1 +1,2 @@
-# VUE前端项目
+# VUE front-end project scaffolding
+
