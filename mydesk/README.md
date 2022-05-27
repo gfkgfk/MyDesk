@@ -1,10 +1,10 @@
 # mydesk
 
-> A Vue.js project
+> vue project
 
-## Build Setup
+## 0x01 Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -25,6 +25,42 @@ npm run e2e
 
 # run all tests
 npm test
+```
+
+## 0x02 Project Configuration
+
+```bash
+
+# Development Environment Configuration File
+/config/dev.env.js
+
+# Production Environment Configuration File
+/config/prod.env.js
+
+# BaseURL config
+/src/userconfig.js
+
+
+```
+
+## 0x03 Business Module Introduction
+
+```bash
+# login module
+src/views/login
+
+# main module
+src/views/main
+
+```
+
+## 0x04 Feature Module Introduction
+
+```bash
+//TODO:
+axios
+mockjs
+
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
