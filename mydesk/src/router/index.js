@@ -25,6 +25,10 @@ export default new Router({
             path: '/test',
             name: 'test',
             component: resolve => require(['@/views/test/test'], resolve)
-        }
+        },
+        {
+            path: '*',
+            redirect: '/404',
+        },
     ]
 })
