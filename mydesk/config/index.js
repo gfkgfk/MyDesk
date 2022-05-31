@@ -22,6 +22,18 @@ module.exports = {
                 onProxyReq: proxyReq => {
                     console.log("onProxyReq:",proxyReq, proxyReq.getHeader('token'))
                 }
+            },
+            '/test': {
+                target: 'https://pv.sohu.com', // interface domain name
+                changeOrigin: true, // cross-domain or not
+                secure: true, // is https or not
+                ws: true, // whether to proxy websockets
+                pathRewrite: { // path rewrite
+                    '^/test': ''
+                },
+                onProxyReq: proxyReq => {
+                    console.log("onProxyReq:",proxyReq, proxyReq.getHeader('token'))
+                }
             }
         },
 
