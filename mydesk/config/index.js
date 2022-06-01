@@ -34,6 +34,18 @@ module.exports = {
                 onProxyReq: proxyReq => {
                     console.log("onProxyReq:",proxyReq, proxyReq.getHeader('token'))
                 }
+            },
+            '/local': {
+                target: 'http://localhost:9091/', // interface domain name
+                changeOrigin: true, // cross-domain or not
+                secure: false, // is https or not
+                ws: true, // whether to proxy websockets
+                pathRewrite: { // path rewrite
+                    '^/local': ''
+                },
+                onProxyReq: proxyReq => {
+                    console.log("onProxyReq:",proxyReq, proxyReq.getHeader('token'))
+                }
             }
         },
 
