@@ -11,13 +11,13 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/api': {
+            '/runoob': {
                 target: 'https://www.runoob.com/', // interface domain name
                 changeOrigin: true, // cross-domain or not
                 secure: true, // is https or not
                 ws: true, // whether to proxy websockets
                 pathRewrite: { // path rewrite
-                    '^/api': ''
+                    '^/runoob': ''
                 },
                 onProxyReq: proxyReq => {
                     console.log("onProxyReq:",proxyReq, proxyReq.getHeader('token'))
