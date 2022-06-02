@@ -1,10 +1,9 @@
 <template>
     <div>
-
-        <div class="red">登录页面</div>
-        <button @click="testBtn">测试按钮</button>
-        <button @click="testBtn2">测试按钮2</button>
-        <button @click="testBtn3">测试按钮3</button>
+        <div class="red">Login Page</div>
+        <button @click="testBtn">Test Button1</button>
+        <button @click="testBtn2">Test Button2</button>
+        <button @click="testBtn3">Test Button3</button>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        login child测试页面
+        login child test page
     </div>
 </template>
 

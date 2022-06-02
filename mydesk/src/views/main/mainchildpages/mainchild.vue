@@ -1,6 +1,6 @@
 <template>
     <div>
-        主页child测试页面
+        main child test page
     </div>
 </template>
 
