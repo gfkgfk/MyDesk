@@ -36,7 +36,7 @@ axios.interceptors.response.use(
         if (isRefreshing) {
             console.log('refreshing...', 'url:', response.config.url, 'retryToken:', response.config.retryToken);
         }
-        //expired refresh token
+        //refresh expired token
         if (isTokenInvalid(response.data.code, 1)) { //TODO:this condition should be modify depends on your business
             if (!isRefreshing) {
                 console.log('refresh token begin');
