@@ -1,10 +1,13 @@
 import axios from 'axios';
 console.log('loading axios');
 
-// request time out
-axios.defaults.timeout = 30000
-//Cross-domain request, allow to save cookies
-axios.defaults.withCredentials = true
+const tokenUrl = '/local/auth' //TODO: change the token url
+const tokenKey = 'X-Token' //TODO:config your token key, is that X-Token?
+
+var isRefreshing = false //refreshing token flag
+var requests = []  // retry requests queue
+axios.defaults.timeout = 30000 // request time out
+axios.defaults.withCredentials = true //Cross-domain request, allow to save cookies
 
 
 // HTTP request interception
@@ -12,7 +15,7 @@ axios.interceptors.request.use(
     config => {
         console.log('request interceptor-success:', config.url, config);
         //TODO: add token to header --get token from vuex
-        config.headers['X-Token'] = 'token'
+        config.headers[tokenKey] = 'token'
         return config
     },
     error => {
@@ -25,34 +28,59 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         console.log('response interceptor-success', response);
-        console.log('response.config.retryToken ', response.config.retryToken, isTokenValid(response.data.code, 1));
-        if (response.config.retryToken && isTokenValid(response.data.code, 1)) { //TODO:this condition should be modify depends on your business
+        console.log('response.config.retryToken:', response.config.retryToken,'isTokenInvalid:', isTokenInvalid(response.data.code, 1));
+        if (response.config.retryToken && isTokenInvalid(response.data.code, 1)) { //TODO:this condition should be modify depends on your business
             console.log('token invalidation re-request failed response:', response.config.url);
             return Promise.reject('retry failed')
         }
-        //expired refresh token
-        if (isTokenValid(response.data.code, 1)) { //TODO:this condition should be modify depends on your business
-            console.log('refresh token');
-            return refreshToken().then(res => {
-                console.log('refreshToken:', res);
-                //get new token in response
-                let token = '9999'
-                //TODO: Vue.setToken(token) --save token
-                let config = response.config
-                console.log('previously failed request config', config.url, config);
-                config.headers['X-Token'] = token
-                config.baseURL = ''
-                //Send the previously failed request 
-                //TODO:fix the url, remove the '?name=test' (now,it's just a test url)
-                return retryRequest(config.url + '?name=test', { retryToken: true })
-            }).catch(res => {
-                console.log('refresh token fail。。。', res.data);
-                return Promise.reject('refresh token failed')
-            })
-        } else {
-            //not expired,no need to refresh the token
-            return response
+        if (isRefreshing) {
+            console.log('refreshing...', 'url:', response.config.url, 'retryToken:', response.config.retryToken);
         }
+        //expired refresh token
+        if (isTokenInvalid(response.data.code, 1)) { //TODO:this condition should be modify depends on your business
+            if (!isRefreshing) {
+                console.log('refresh token begin');
+                isRefreshing = true // set status to refreshing
+                return refreshToken().then(res => {
+                    console.log('refreshToken:', res);
+                    //get new token in response
+                    let token = '9999'
+                    //TODO: Vue.setToken(token) --save token
+                    let config = response.config
+                    console.log('previously failed request config', config.url, config);
+                    config.headers[tokenKey] = token
+                    config.baseURL = ''
+
+                    //send requests in the cache request queue
+                    requests.forEach(cb => cb(token))
+                    //clear queue
+                    requests = []
+
+                    //Send the previously failed request 
+                    return retryRequest(config.url, { retryToken: true })
+                }).catch(res => {
+                    console.log('refresh token fail。。。', res.data);
+                    return Promise.reject('refresh token failed')
+                }).finally(() => {
+                    console.log('refresh token complete');
+                    isRefreshing = false
+                })
+            } else {
+                // is refreshing...Returns a promise that is not resolved
+                return new Promise((resolve) => {
+                    requests.push((token) => {
+                        let cfg = response.config
+                        cfg.baseURL = ''
+                        cfg.headers[tokenKey] = token
+                        resolve(retryRequest(cfg.url, cfg))
+                    })
+                })
+            }
+        }
+
+
+        //not expired,no need to refresh the token
+        return response
     },
     error => {
         console.log('response interceptor-error: ', error);
@@ -66,12 +94,11 @@ axios.interceptors.response.use(
  */
 function refreshToken () {
     //send request to get token
-    let url = "/auth";
-    return retryRequest('/local' + url, { retryToken: true }).then(res => {
+    return retryRequest(tokenUrl, { retryToken: true }).then(res => {
         if (res.status == 200) { //refresh token success
             return res.data
-        } else { 
-            console.log('刷新auth 失败');
+        } else {
+            console.log('refreshToken request fail');
             return Promise.reject(res)
         }
     })
@@ -94,7 +121,7 @@ function retryRequest (url, config) {
  * @param {Number} source 
  * @param {Number} target 
  */
-function isTokenValid (source, target) {
+function isTokenInvalid (source, target) {
     if (source == target) {
         return true
     }

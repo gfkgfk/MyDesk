@@ -4,6 +4,7 @@
         <div class="red">登录页面</div>
         <button @click="testBtn">测试按钮</button>
         <button @click="testBtn2">测试按钮2</button>
+        <button @click="testBtn3">测试按钮3</button>
     </div>
 </template>
 
@@ -11,35 +12,49 @@
 export default {
     methods: {
         testBtn() {
-            console.log('测试')
-            // let url = "/auth";
+            console.log('test btn clicked')
             let url = '/getList'
             this.$http
                 .get('/local' + url)
                 .then(response => {
-                    console.log('success')
+                    console.log('testBtn success')
                     console.log(response)
                 })
                 .catch(function(error) {
-                    console.log('error')
+                    console.log('testBtn error')
                     console.log(error)
                 })
         },
+
         testBtn2() {
-            console.log('测试')
-            // let url = "/auth";
+            console.log('test2 btn clicked')
             let url = '/getList'
-            this.$http.create()
+            this.$http
+                .create()
                 .get('/local' + url)
                 .then(response => {
                     console.log('testBtn2 success')
-                    console.log('testBtn2',response)
+                    console.log('testBtn2', response)
                 })
                 .catch(function(error) {
                     console.log('testBtn2 error')
-                    console.log('testBtn2',error)
+                    console.log('testBtn2', error)
                 })
-        }
+        },
+        testBtn3() {
+            console.log('test3 btn clicked')
+            let url = '/auth'
+            this.$http
+                .get('/local' + url)
+                .then(response => {
+                    console.log('testBtn3 success')
+                    console.log(response)
+                })
+                .catch(function(error) {
+                    console.log('testBtn3 error')
+                    console.log(error)
+                })
+        },
     }
 }
 </script>
