@@ -60,7 +60,7 @@ src/views/main
 //TODO:
 axios
 mockjs
-vuex
+vuex --1.save token
 ui
 
 ```
