@@ -5,6 +5,10 @@ import App from './App'
 import router from './router'
 import axios from './utils/axios';
 
+import Vuex from 'vuex';
+ 
+Vue.use(Vuex)
+
 Vue.prototype.$http = axios
 
 /* eslint-disable no-new */
