@@ -4,6 +4,9 @@
         <button @click="testBtn">Test Button1</button>
         <button @click="testBtn2">Test Button2</button>
         <button @click="testBtn3">Test Button3</button>
+        <button @click="testBtn4">Test Button4</button>
+        <div>6666:{{this.$store.state.token}}</div>
+        <button @click="testBtn5">Test Button5</button>
     </div>
 </template>
 
@@ -54,6 +57,14 @@ export default {
                     console.log(error)
                 })
         },
+        testBtn4(){
+            console.log('test4 btn clicked');
+            this.$store.commit('setToken', '*******')
+        },
+        testBtn5(){
+             console.log('test5 btn clicked');
+             console.log(this.$store.state.token);
+        }
     }
 }
 </script>
