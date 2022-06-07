@@ -10,6 +10,8 @@
         <button @click="testBtn5">Test Button5</button>
         <button @click="testBtn6">Test Button6</button>
         <button @click="testBtn7">Test Button7</button>
+        <button @click="testBtn8">Test Button8</button>
+        <button @click="testBtn9">Test Button9</button>
     </div>
 </template>
 
@@ -81,6 +83,32 @@ export default {
             let a = this.$store.getters['userStore/getUserName']
             console.log(a);
 
+        },
+        testBtn8(){
+            let url = 'http://www.test.com/api/mock/login'
+            this.$http
+                .get(url)
+                .then(response => {
+                    console.log('testBtn success')
+                    console.log(response)
+                })
+                .catch(function(error) {
+                    console.log('testBtn error')
+                    console.log(error)
+                })
+        },
+        testBtn9(){
+            let url = 'http://localhost:8080/api/mock/login'
+            this.$http
+                .get(url)
+                .then(response => {
+                    console.log('testBtn success')
+                    console.log(response)
+                })
+                .catch(function(error) {
+                    console.log('testBtn error')
+                    console.log(error)
+                })
         }
     }
 }

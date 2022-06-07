@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import axios from './utils/axios';
 import store from './store/store'
+if(Vue.config.mockMode){ // import mock mode
+    require("./mock/mock")
+    console.log('mock mode enable');
+}
+
 
 import Vuex from 'vuex';
  
