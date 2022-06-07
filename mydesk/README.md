@@ -64,6 +64,7 @@ axios--finished, some details left(TODO)
 mockjs
 vuex --1.save token --finished.
 ui
+lodash
 
 ```
 
