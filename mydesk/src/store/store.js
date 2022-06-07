@@ -6,6 +6,8 @@ import actions from './actions';
 import getters from './getters';
 import createPersistedState from "vuex-persistedstate"
 import SecureLS from 'secure-ls'
+//sub module
+import userStore from './user/store'; 
 
 const StoreKey ='store' //vuex localStorage key
 const ls = new SecureLS({ encodingType: '',isCompression: false }) //encoding vuex persisted config, encodingType: base64/aes/des/rabbit/rc4/''
@@ -17,6 +19,9 @@ export default new Vuex.Store({
     mutations,
     actions,
     getters,
+    modules:{
+        userStore
+    },
     plugins: [
         createPersistedState({ //vuex persisted plugin
             key: StoreKey,

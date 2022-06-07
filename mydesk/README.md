@@ -40,6 +40,8 @@ npm test
 # BaseURL config
 /src/userconfig.js
 
+# Vuex persisted config
+/src/store/store.js
 
 ```
 
@@ -60,7 +62,7 @@ src/views/main
 //TODO:
 axios--finished, some details left(TODO)
 mockjs
-vuex --1.save token 
+vuex --1.save token --finished.
 ui
 
 ```
