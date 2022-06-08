@@ -1,4 +1,8 @@
 import axios from 'axios';
+import Vue from 'vue';
+import qs from 'qs'
+import { mockPathBase } from '@/mock/mock'
+
 console.log('loading axios');
 
 const tokenUrl = '/local/auth' //TODO: change the token url
@@ -8,7 +12,10 @@ var isRefreshing = false //refreshing token flag
 var requests = []  // retry requests queue
 axios.defaults.timeout = 30000 // request time out
 axios.defaults.withCredentials = true //Cross-domain request, allow to save cookies
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8' // set post request headers
+var mockMode = Vue.config.mockMode
 
+var urls = require('@/api/api') // url config file set
 
 // HTTP request interception
 axios.interceptors.request.use(
@@ -28,7 +35,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         console.log('response interceptor-success', response);
-        console.log('response.config.retryToken:', response.config.retryToken,'isTokenInvalid:', isTokenInvalid(response.data.code, 1));
+        console.log('response.config.retryToken:', response.config.retryToken, 'isTokenInvalid:', isTokenInvalid(response.data.code, 1));
         if (response.config.retryToken && isTokenInvalid(response.data.code, 1)) { //TODO:this condition should be modify depends on your business
             console.log('token invalidation re-request failed response:', response.config.url);
             return Promise.reject('retry failed')
@@ -126,6 +133,47 @@ function isTokenInvalid (source, target) {
         return true
     }
     return false
+}
+console.log('导入');
+axios.test = function test () {
+    console.log('test');
+}
+
+axios.send = function send (obj) {
+    if (!urls.default[obj.name]) {
+        return Promise.reject('url is not included in config file (api.js config)')
+    }
+    if (mockMode) {
+        let url = mockPathBase + urls.default[obj.name].real
+        let data = obj.data
+        let type = urls.default[obj.name].type
+        return axios.request({
+            url: url,
+            method: type,
+            data: data,
+        })
+
+    } else {
+        let url = urls.default[obj.name].apiPrefix + urls.default[obj.name].real
+        let data = obj.data
+        let type = urls.default[obj.name].type
+        // Generate get request parameters
+        if(type.toUpperCase()=='GET'){
+            url+="?"
+            for (let key in data) {
+                url+=key+"="+data[key]+"&"
+            }
+        }
+        // post request handle
+        if(type.toUpperCase()=='POST'){
+
+        }
+        return axios.request({
+            url: url,
+            method: type,
+            data: data,
+        })
+    }
 }
 
 export default axios
