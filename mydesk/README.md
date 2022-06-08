@@ -61,10 +61,11 @@ src/views/main
 ```bash
 //TODO:
 axios--finished, some details left(TODO)
-mockjs
+mockjs -- finished
 vuex --1.save token --finished.
 ui
 lodash
+edit 0x02 Project Configuration
 
 ```
 
