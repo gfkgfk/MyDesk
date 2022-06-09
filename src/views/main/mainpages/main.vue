@@ -1,6 +1,7 @@
 <template>
     <div class="main">
-        主界面
+        <!-- 主界面 -->
+        http://110.40.220.207:8081/#/heart
     </div>
 </template>
 
@@ -27,10 +28,10 @@ export default {
 
 /* find the digital rain background canvas */
 #canvasmark {
-    z-index: -9999;
+    z-index: 1;
 }
 /* find the digital rain background div */
 #divmark {
-    z-index: -9999;
+    z-index: 1;
 }
 </style>
