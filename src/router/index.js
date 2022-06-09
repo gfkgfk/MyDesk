@@ -11,7 +11,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/heart',
+            redirect: '/main',
         },
         {
             path: '/404',
