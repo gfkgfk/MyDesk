@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import axios from './utils/axios';
 import store from './store/store'
-import _ from 'lodash'; 
+import _ from 'lodash';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 if(Vue.config.mockMode){ // import mock mode
     require("./mock/mock")
@@ -16,6 +18,8 @@ if(Vue.config.mockMode){ // import mock mode
 import Vuex from 'vuex';
  
 Vue.use(Vuex)
+Vue.use(ElementUI);
+
 Vue.prototype.$lodash = _;
 Vue.prototype.$http = axios
 

@@ -1,5 +1,63 @@
 <template>
     <div>
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content bg-purple-dark"></div>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="12">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="12">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="8">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="8">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="8">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="6">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="4">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple"></div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple-light"></div>
+            </el-col>
+        </el-row>
         <div class="red">Login Page</div>
         <div>token:{{this.$store.state.token}}</div>
         <div>userName:{{this.$store.state.userStore.userName}}</div>
@@ -166,7 +224,6 @@ export default {
             console.log('testBtn12 clicked')
             const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             console.log(this.$lodash.chunk(arr, 2))
-            
         }
     }
 }
@@ -176,4 +233,30 @@ export default {
 .red {
     color: red;
 }
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
 </style>
