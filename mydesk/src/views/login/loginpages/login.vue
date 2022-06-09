@@ -3,17 +3,17 @@
         <div class="red">Login Page</div>
         <div>token:{{this.$store.state.token}}</div>
         <div>userName:{{this.$store.state.userStore.userName}}</div>
-        <button @click="testBtn">Test Button1</button>
-        <button @click="testBtn2">Test Button2</button>
-        <button @click="testBtn3">Test Button3</button>
-        <button @click="testBtn4">Test Button4</button>
-        <button @click="testBtn5">Test Button5</button>
-        <button @click="testBtn6">Test Button6</button>
-        <button @click="testBtn7">Test Button7</button>
-        <button @click="testBtn8">Test Button8</button>
-        <button @click="testBtn9">Test Button9</button>
-        <button @click="testBtn10">Test Button10</button>
-        <button @click="testBtn11">Test Button11</button>
+        <button @click="testBtn">Refresh Token</button>
+        <button @click="testBtn2">Get Request</button>
+        <button @click="testBtn3">Auth Refresh Token</button>
+        <button @click="testBtn4">Vuex Set Token</button>
+        <button @click="testBtn5">Vuex Get Token</button>
+        <button @click="testBtn6">Vuex Set Token Action</button>
+        <button @click="testBtn7">Vuex Module Get</button>
+        <button @click="testBtn8">Get Mock Data</button>
+        <button @click="testBtn9">Get Mock Data</button>
+        <button @click="testBtn10">Post Request</button>
+        <button @click="testBtn11">Send Wrapper Request</button>
     </div>
 </template>
 
@@ -134,8 +134,8 @@ export default {
             //     })
 
             this.$http
-                // .post('/local'+url, { name: 'GFK', age: 90 })  //Auto change Content-Type to application/json
-                .post('/local' + url, qs.stringify({ name: 'GFK', age: 90 })) //Auto change Content-Type to application/x-www-form-urlencoded
+                .post('/local' + url, { name: 'GFK', age: 90 }) //Auto change Content-Type to application/json
+                // .post('/local' + url, qs.stringify({ name: 'GFK', age: 90 })) //Auto change Content-Type to application/x-www-form-urlencoded
                 .then(response => {
                     console.log('testBtn10 success')
                     console.log(response)
@@ -153,7 +153,7 @@ export default {
                 })
                 .then(res => {
                     console.log('then')
-                    console.log('res',res)
+                    console.log('res', res)
                 })
                 .catch(error => {
                     console.log('error')
