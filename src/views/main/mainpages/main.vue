@@ -8,12 +8,7 @@
 import './js/digitalrain'
 export default {
     created() {
-        //TODO:remove the element
-        //force refresh to avoid the effect of heart page(three.js) 
-        if (location.href.indexOf('#reloaded') <= 0) {
-            location.href = location.href + '#reloaded'
-            location.reload()
-        }
+        //TODO:remove the element to avoid the effect of heart page(three.js) 
     }
 }
 </script>
