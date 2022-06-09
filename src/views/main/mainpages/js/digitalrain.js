@@ -2430,6 +2430,8 @@ $packages["main"] = (function() {
 				$s = -1; return;
 			/* } */ case 2:
 			cover = $global.document.createElement($externalize("div", $String));
+            //mark div id
+            cover.id="divmark"
 			cover.style.height = $externalize("100%", $String);
 			cover.style.width = $externalize("100%", $String);
 			cover.style[$externalize("background-image", $String)] = $externalize("radial-gradient(ellipse farthest-corner at 45px 45px , #00FFFF 0%, rgba(0, 0, 255, 0) 50%, #0000FF 95%)", $String);
@@ -2541,6 +2543,8 @@ $packages["main"] = (function() {
 			r.parent.removeChild(r.canvas);
 		}
 		r.canvas = $global.document.createElement($externalize("canvas", $String));
+        //mark canvas id
+        r.canvas.id = "canvasmark"
 		r.ctx = r.canvas.getContext($externalize("2d", $String));
 		r.canvas.width = r.width;
 		r.canvas.height = r.height;
