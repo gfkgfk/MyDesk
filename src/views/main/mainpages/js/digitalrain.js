@@ -2410,7 +2410,7 @@ $packages["main"] = (function() {
 		sheet = $global.document.createElement($externalize("style", $String));
 		sheet.innerHTML = $externalize("html, body { \n\t\t\tpadding:0; margin:0; border:0; width:100%; height:100%; overflow:hidden;\n\t\t}\n\t\thtml{\n\t\t\tbackground: black;\n\t\t}", $String);
 		$global.document.head.appendChild(sheet);
-		$global.document.title = $externalize("whoa", $String);
+		// $global.document.title = $externalize("whoa", $String);
 		$global.addEventListener($externalize("load", $String), $externalize((function $b() {
 			var _r, _r$1, _tuple, _tuple$1, cover, err, rain1, rain2, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; cover = $f.cover; err = $f.err; rain1 = $f.rain1; rain2 = $f.rain2; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -2557,7 +2557,10 @@ $packages["main"] = (function() {
 		r.canvas.addEventListener($externalize("click", $String), $externalize((function $b(ev) {
 			var ev, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; ev = $f.ev; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-			/* */ if (r.overLink($parseInt(ev.x) >> 0, $parseInt(ev.y) >> 0)) { $s = 1; continue; }
+            
+            //  foot link click trigger
+			// /* */ if (r.overLink($parseInt(ev.x) >> 0, $parseInt(ev.y) >> 0)) { $s = 1; continue; }
+
 			/* */ $s = 2; continue;
 			/* if (r.overLink($parseInt(ev.x) >> 0, $parseInt(ev.y) >> 0)) { */ case 1:
 				$global.location = $externalize(githubLink, $String);
@@ -2572,16 +2575,19 @@ $packages["main"] = (function() {
 			$s = -1; return;
 			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.ev = ev; $f.$s = $s; $f.$r = $r; return $f;
 		}), funcType$1));
-		r.canvas.addEventListener($externalize("mousemove", $String), $externalize((function(ev) {
-			var ev;
-			if (r.overLink($parseInt(ev.x) >> 0, $parseInt(ev.y) >> 0)) {
-				r.canvas.style.cursor = $externalize("pointer", $String);
-				r.linkover = true;
-			} else {
-				r.canvas.style.cursor = $externalize("default", $String);
-				r.linkover = false;
-			}
-		}), funcType$1));
+
+        //foot link mouseover event
+
+		// r.canvas.addEventListener($externalize("mousemove", $String), $externalize((function(ev) {
+		// 	var ev;
+		// 	if (r.overLink($parseInt(ev.x) >> 0, $parseInt(ev.y) >> 0)) {
+		// 		r.canvas.style.cursor = $externalize("pointer", $String);
+		// 		r.linkover = true;
+		// 	} else {
+		// 		r.canvas.style.cursor = $externalize("default", $String);
+		// 		r.linkover = false;
+		// 	}
+		// }), funcType$1));
 		r.loop(r.timestamp);
 	};
 	DigitalRain.prototype.layout = function() { return this.$val.layout(); };
@@ -2711,11 +2717,14 @@ $packages["main"] = (function() {
 		var r, y;
 		r = this;
 		y = 0;
-		if (r.linkover) {
-			y = r.drawTitle(shortLink(githubLink), githubLinkOverColor, 15 * r.ratio, y);
-		} else {
-			y = r.drawTitle(shortLink(githubLink), githubLinkColor, 15 * r.ratio, y);
-		}
+
+        // foot link mouseover display
+
+		// if (r.linkover) {
+		// 	y = r.drawTitle(shortLink(githubLink), githubLinkOverColor, 15 * r.ratio, y);
+		// } else {
+		// 	y = r.drawTitle(shortLink(githubLink), githubLinkColor, 15 * r.ratio, y);
+		// }
 	};
 	DigitalRain.prototype.drawTitles = function() { return this.$val.drawTitles(); };
 	DigitalRain.ptr.prototype.loop = function(timestamp) {
