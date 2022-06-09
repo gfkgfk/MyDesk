@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import axios from './utils/axios';
 import store from './store/store'
+import _ from 'lodash'; 
+
 if(Vue.config.mockMode){ // import mock mode
     require("./mock/mock")
     console.log('mock mode enable');
@@ -14,7 +16,7 @@ if(Vue.config.mockMode){ // import mock mode
 import Vuex from 'vuex';
  
 Vue.use(Vuex)
-
+Vue.prototype.$lodash = _;
 Vue.prototype.$http = axios
 
 /* eslint-disable no-new */

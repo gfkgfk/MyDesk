@@ -134,11 +134,12 @@ function isTokenInvalid (source, target) {
     }
     return false
 }
-console.log('导入');
-axios.test = function test () {
-    console.log('test');
-}
 
+/**
+ * Request Wrapper
+ * @param {Object} {name: "request api name",data:{request params}} 
+ * @returns 
+ */
 axios.send = function send (obj) {
     if (!urls.default[obj.name]) {
         return Promise.reject('url is not included in config file (api.js config)')

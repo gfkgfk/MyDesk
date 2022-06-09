@@ -14,12 +14,14 @@
         <button @click="testBtn9">Get Mock Data</button>
         <button @click="testBtn10">Post Request</button>
         <button @click="testBtn11">Send Wrapper Request</button>
+        <button @click="testBtn12">Lodash</button>
     </div>
 </template>
 
 <script>
 import { mapActions, mapMutations } from 'vuex'
 import qs from 'qs'
+import _ from 'lodash'
 export default {
     created() {},
     methods: {
@@ -159,6 +161,12 @@ export default {
                     console.log('error')
                     console.log(error)
                 })
+        },
+        testBtn12() {
+            console.log('testBtn12 clicked')
+            const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            console.log(this.$lodash.chunk(arr, 2))
+            
         }
     }
 }
