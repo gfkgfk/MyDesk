@@ -37,11 +37,18 @@ npm test
 # Production Environment Configuration File
 /config/prod.env.js
 
-# BaseURL config
+# BaseURL/Mock Enable/Api Prefix config
 /src/userconfig.js
 
 # Vuex persisted config
 /src/store/store.js
+
+# Mock data config
+# -config mock base path
+/src/mock/mock.js
+
+# Request api config
+/src/api/xxx/xxxapi.js
 
 ```
 
@@ -63,10 +70,11 @@ src/views/main
 axios--finished, some details left(TODO)
 mockjs -- finished
 vuex --1.save token --finished.
-ui
+ui -- element ui
 lodash
-edit 0x02 Project Configuration
 
 ```
+
+## 0x05 Project Structure Introduction
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
