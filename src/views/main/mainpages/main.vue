@@ -6,7 +6,16 @@
 
 <script>
 import './js/digitalrain'
-export default {}
+export default {
+    created() {
+        //TODO:remove the element
+        //force refresh to avoid the effect of heart page(three.js) 
+        if (location.href.indexOf('#reloaded') <= 0) {
+            location.href = location.href + '#reloaded'
+            location.reload()
+        }
+    }
+}
 </script>
 
 <style>
@@ -15,18 +24,18 @@ export default {}
     position: relative;
     color: white;
 }
-#app{
+#app {
     height: 100%;
     width: 100%;
     position: absolute;
 }
 
 /* find the digital rain background canvas */
-#canvasmark{
-z-index: -9999;
+#canvasmark {
+    z-index: -9999;
 }
 /* find the digital rain background div */
-#divmark{
-z-index: -9999;
+#divmark {
+    z-index: -9999;
 }
 </style>
