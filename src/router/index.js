@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/views/login/config.js'
 import main from '@/views/main/config.js'
+import heart from '@/views/heart/config.js'
 import test from '@/views/test/test'
 
 Vue.use(Router)
@@ -10,7 +11,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/login',
+            redirect: '/heart',
         },
         {
             path: '/404',
@@ -19,6 +20,7 @@ export default new Router({
         },
         main.router,
         login.router,
+        heart.router,
         {
             path: '/test',
             name: 'test',

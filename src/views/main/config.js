@@ -2,7 +2,7 @@ import config from '@/userconfig';
 export default {
     router: {
         path: "/main",
-        component: resolve => require(['@/components/common/layout'], resolve),
+        component: resolve => require(['@/views/main/mainpages/main'], resolve),
         children: [
             {
                 path: "/main/mainchild",
