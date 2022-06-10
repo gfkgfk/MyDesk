@@ -9,21 +9,21 @@
         </transition>
 
         <div class="weather" @click="getWeather">
-            <el-collapse v-model="activeNames" @change="handleChange">
+            <el-collapse class="weather-collapse" v-model="activeNames" @change="handleChange">
                 <el-collapse-item title="WEATHER" name="1">
-                    <div>CITY:{{city}}</div>
-                    <div>WEEK:{{week}}</div>
-                    <div>UPDATETIME:{{updateTime}}</div>
-                    <div>WEATHER:{{weather}}</div>
-                    <div>REALTEMPRATURE:{{realTemprature}}</div>
-                    <div>DAYTEMPRATURE:{{dayTemprature}}</div>
-                    <div>NIGHTTEMPRATURE:{{nightTemprature}}</div>
-                    <div>WIND:{{wind}}</div>
-                    <div>WINDSPEED:{{windSpeed}}</div>
-                    <div>WINDMETER:{{windMeter}}</div>
-                    <div>AIR:{{air}}</div>
-                    <div>PRESURE:{{pressure}}</div>
-                    <div>HUMIDITY:{{humidity}}</div>
+                    <div class="weather-item">CITY:{{city}}</div>
+                    <div class="weather-item">WEEK:{{week}}</div>
+                    <div class="weather-item">UPDATETIME:{{updateTime}}</div>
+                    <div class="weather-item">WEATHER:{{weather}}</div>
+                    <div class="weather-item">REALTEMPRATURE:{{realTemprature}}</div>
+                    <div class="weather-item">DAYTEMPRATURE:{{dayTemprature}}</div>
+                    <div class="weather-item">NIGHTTEMPRATURE:{{nightTemprature}}</div>
+                    <div class="weather-item">WIND:{{wind}}</div>
+                    <div class="weather-item">WINDSPEED:{{windSpeed}}</div>
+                    <div class="weather-item">WINDMETER:{{windMeter}}</div>
+                    <div class="weather-item">AIR:{{air}}</div>
+                    <div class="weather-item">PRESURE:{{pressure}}</div>
+                    <div class="weather-item">HUMIDITY:{{humidity}}</div>
                 </el-collapse-item>
             </el-collapse>
         </div>
@@ -167,11 +167,18 @@ export default {
 }
 
 .weather {
+    padding: 10px;
     position: fixed;
     width: 100%;
     bottom: 0;
     left: 0;
     display: flex;
+    .weather-collapse{
+        width: 200px;
+        .weather-item{
+            padding: 5px;
+        }
+    }
 }
 .footer {
     position: fixed;
