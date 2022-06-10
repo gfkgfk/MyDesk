@@ -4,21 +4,24 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from './utils/axios';
+import { VueJsonp } from 'vue-jsonp'
 import store from './store/store'
 import _ from 'lodash';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import './assets/css/common.css' //common css
 
-if(Vue.config.mockMode){ // import mock mode
+if (Vue.config.mockMode) { // import mock mode
     require("./mock/mock")
     console.log('mock mode enable');
 }
 
 
 import Vuex from 'vuex';
- 
+
 Vue.use(Vuex)
 Vue.use(ElementUI);
+Vue.use(VueJsonp)
 
 Vue.prototype.$lodash = _;
 Vue.prototype.$http = axios

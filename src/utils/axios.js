@@ -141,6 +141,9 @@ function isTokenInvalid (source, target) {
  * @returns 
  */
 axios.send = function send (obj) {
+    console.log(urls.default);
+    console.log(obj.name);
+    console.log(urls.default[obj.name]);
     if (!urls.default[obj.name]) {
         return Promise.reject('url is not included in config file (api.js config)')
     }
