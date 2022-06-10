@@ -10,6 +10,7 @@ if (typeof window !== "undefined") { /* web page */
   $global = self;
 } else if (typeof global !== "undefined") { /* Node.js */
   $global = global;
+  // edit: avoid warning
 //   $global.require = require;
 } else { /* others (e.g. Nashorn) */
   $global = this;
@@ -2408,7 +2409,8 @@ $packages["main"] = (function() {
 	main = function() {
 		var sheet;
 		sheet = $global.document.createElement($externalize("style", $String));
-		sheet.innerHTML = $externalize("html, body { \n\t\t\tpadding:0; margin:0; border:0; width:100%; height:100%; overflow:hidden;\n\t\t}\n\t\thtml{\n\t\t\tbackground: black;\n\t\t}", $String);
+        //edit: remove overflow:hidden; 
+		sheet.innerHTML = $externalize("html, body { \n\t\t\tpadding:0; margin:0; border:0; width:100%; height:100%; \n\t\t}\n\t\thtml{\n\t\t\tbackground: black;\n\t\t}", $String);
 		$global.document.head.appendChild(sheet);
 		// $global.document.title = $externalize("whoa", $String);
 		$global.addEventListener($externalize("load", $String), $externalize((function $b() {
@@ -2430,8 +2432,10 @@ $packages["main"] = (function() {
 				$s = -1; return;
 			/* } */ case 2:
 			cover = $global.document.createElement($externalize("div", $String));
-            //mark div id
+            //edit: mark div id
             cover.id="divmark"
+            //edit: let div top = 0
+			cover.style.top = 0;
 			cover.style.height = $externalize("100%", $String);
 			cover.style.width = $externalize("100%", $String);
 			cover.style[$externalize("background-image", $String)] = $externalize("radial-gradient(ellipse farthest-corner at 45px 45px , #00FFFF 0%, rgba(0, 0, 255, 0) 50%, #0000FF 95%)", $String);
@@ -2543,11 +2547,13 @@ $packages["main"] = (function() {
 			r.parent.removeChild(r.canvas);
 		}
 		r.canvas = $global.document.createElement($externalize("canvas", $String));
-        //mark canvas id
+        //edit:mark canvas id
         r.canvas.id = "canvasmark"
 		r.ctx = r.canvas.getContext($externalize("2d", $String));
 		r.canvas.width = r.width;
 		r.canvas.height = r.height;
+        //edit:mark let canvas top = 0
+		r.canvas.style.top = 0
 		r.canvas.style.width = $externalize(ftoa(r.width / r.ratio) + "px", $String);
 		r.canvas.style.height = $externalize(ftoa(r.height / r.ratio) + "px", $String);
 		r.canvas.style.position = $externalize("absolute", $String);
@@ -2562,7 +2568,7 @@ $packages["main"] = (function() {
 			var ev, $s, $r;
 			/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; ev = $f.ev; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
             
-            //  foot link click trigger
+            // edit:  foot link click trigger
 			// /* */ if (r.overLink($parseInt(ev.x) >> 0, $parseInt(ev.y) >> 0)) { $s = 1; continue; }
 
 			/* */ $s = 2; continue;
@@ -2580,7 +2586,7 @@ $packages["main"] = (function() {
 			/* */ } return; } if ($f === undefined) { $f = { $blk: $b }; } $f.ev = ev; $f.$s = $s; $f.$r = $r; return $f;
 		}), funcType$1));
 
-        //foot link mouseover event
+        //edit: foot link mouseover event
 
 		// r.canvas.addEventListener($externalize("mousemove", $String), $externalize((function(ev) {
 		// 	var ev;
@@ -2722,7 +2728,7 @@ $packages["main"] = (function() {
 		r = this;
 		y = 0;
 
-        // foot link mouseover display
+        // edit: foot link mouseover display
 
 		// if (r.linkover) {
 		// 	y = r.drawTitle(shortLink(githubLink), githubLinkOverColor, 15 * r.ratio, y);
