@@ -8,26 +8,38 @@
             </div>
         </transition>
 
-        <div class="weather" @click="getWeather">
-            <el-collapse class="weather-collapse" v-model="activeNames" @change="handleChange">
-                <el-collapse-item title="WEATHER" name="1">
-                    <div class="weather-item">CITY:{{city}}</div>
-                    <div class="weather-item">WEEK:{{week}}</div>
-                    <div class="weather-item">UPDATETIME:{{updateTime}}</div>
-                    <div class="weather-item">WEATHER:{{weather}}</div>
-                    <div class="weather-item">REALTEMPRATURE:{{realTemprature}}</div>
-                    <div class="weather-item">DAYTEMPRATURE:{{dayTemprature}}</div>
-                    <div class="weather-item">NIGHTTEMPRATURE:{{nightTemprature}}</div>
-                    <div class="weather-item">WIND:{{wind}}</div>
-                    <div class="weather-item">WINDSPEED:{{windSpeed}}</div>
-                    <div class="weather-item">WINDMETER:{{windMeter}}</div>
-                    <div class="weather-item">AIR:{{air}}</div>
-                    <div class="weather-item">PRESURE:{{pressure}}</div>
-                    <div class="weather-item">HUMIDITY:{{humidity}}</div>
-                </el-collapse-item>
-            </el-collapse>
+        <div class="weather" v-if="weatherShow">
+            <div class="weather-container">
+                <el-collapse class="weather-collapse" v-model="activeNames" @change="handleChange">
+                    <el-collapse-item title="WEATHER" name="1">
+                        <div class="weather-item">CITY: {{city}}</div>
+                        <div class="weather-item">WEEK: {{week}}</div>
+                        <div class="weather-item">UPDATETIME: {{updateTime}}</div>
+                        <div class="weather-item">WEATHER: {{weather}}</div>
+                        <div class="weather-item">REALTEMPRATURE: {{realTemprature}}</div>
+                        <div class="weather-item">DAYTEMPRATURE: {{dayTemprature}}</div>
+                        <div class="weather-item">NIGHTTEMPRATURE: {{nightTemprature}}</div>
+                        <div class="weather-item">WIND: {{wind}}</div>
+                        <div class="weather-item">WINDSPEED: {{windSpeed}}</div>
+                        <div class="weather-item">WINDMETER: {{windMeter}}</div>
+                        <div class="weather-item">AIR: {{air}}</div>
+                        <div class="weather-item">PRESURE: {{pressure}}</div>
+                        <div class="weather-item">HUMIDITY: {{humidity}}</div>
+                    </el-collapse-item>
+                </el-collapse>
+            </div>
         </div>
         <div class="footer" @click="getWeather">{{footerInfo}}</div>
+        
+        <div class="cmd">
+            <el-row type="flex">
+                <el-col :span="18">
+                    <div class="grid-content bg-purple-dark line-break">
+                        
+                    </div>
+                </el-col>
+            </el-row>
+        </div>
 
     </div>
 </template>
@@ -49,22 +61,22 @@ export default {
                 { color: '#5cb87a', percentage: 100 }
             ],
             showload: false,
+            weatherShow: false,
             timer: '',
-            activeNames:'',
-            city:'--',
-            week:'--',
-            updateTime:'--',
-            weather:'--',
-            realTemprature:'--',
-            dayTemprature:'--',
-            nightTemprature:'--',
-            wind:'--',
-            windSpeed:'--',
-            windMeter:'--',
-            air:"--",
-            pressure:'--',
-            humidity:'--'
-
+            activeNames: '',
+            city: '--',
+            week: '--',
+            updateTime: '--',
+            weather: '--',
+            realTemprature: '--',
+            dayTemprature: '--',
+            nightTemprature: '--',
+            wind: '--',
+            windSpeed: '--',
+            windMeter: '--',
+            air: '--',
+            pressure: '--',
+            humidity: '--'
         }
     },
     methods: {
@@ -73,8 +85,8 @@ export default {
                 clearInterval(this.timer) // remove timer
             }
         },
-        handleChange(val){
-            console.log('handleChange',val);
+        handleChange(val) {
+            console.log('handleChange', val)
         },
         getWeather() {
             let url =
@@ -95,6 +107,8 @@ export default {
                     this.pressure = res.pressure
                     this.humidity = res.humidity
                     console.log(res)
+                    //request weather info success then display the weather widget
+                    this.weatherShow = true
                 })
                 .catch(err => {
                     console.log(err)
@@ -132,8 +146,9 @@ export default {
     created() {
         //TODO:remove the element to avoid the effect of heart page(three.js)
 
-        this.loadStart()
-        this.showFooter()
+        this.loadStart() // start loading progress
+        this.showFooter() // start timer
+        this.getWeather() // request the weather info
     }
 }
 </script>
@@ -173,10 +188,17 @@ export default {
     bottom: 0;
     left: 0;
     display: flex;
-    .weather-collapse{
-        width: 200px;
-        .weather-item{
-            padding: 5px;
+    opacity: 0.8;
+    .weather-container {
+        border: 1px solid;
+        border-radius: 5px;
+        background: white;
+        padding-left: 10px;
+        .weather-collapse {
+            width: 200px;
+            .weather-item {
+                padding: 5px;
+            }
         }
     }
 }
@@ -187,6 +209,19 @@ export default {
     right: 0;
     display: flex;
     justify-content: flex-end;
+}
+.cmd {
+    position: relative;
+}
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+.bg-purple-light {
+    background: #e5e9f2;
+}
+.bg-purple-dark {
+    background: #99a9bf;
 }
 
 /* find the digital rain background canvas */
