@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <div></div>
+        <cmd v-if="cmdShow" class="cmd"  @cmdCallback="cmdCallback"></cmd>
         <transition name="el-fade-in-linear">
             <div class="middle" v-if="showload">
                 <div class="progress-title fs20">Loading...</div>
@@ -30,25 +30,20 @@
             </div>
         </div>
         <div class="footer" @click="getWeather">{{footerInfo}}</div>
-        
-        <div class="cmd">
-            <el-row type="flex">
-                <el-col :span="18">
-                    <div class="grid-content bg-purple-dark line-break">
-                        
-                    </div>
-                </el-col>
-            </el-row>
-        </div>
 
     </div>
 </template>
 
 <script>
-import { dateFormat } from '@/utils/utils'
-import config from '@/userconfig'
 import './js/digitalrain'
+import config from '@/userconfig'
+import cmd from '@/components/cmdr/cmdr'
+import cmdhandler from './js/cmdhandler'
+import { dateFormat } from '@/utils/utils'
 export default {
+    components: {
+        cmd
+    },
     data() {
         return {
             date: new Date(),
@@ -61,6 +56,7 @@ export default {
                 { color: '#5cb87a', percentage: 100 }
             ],
             showload: false,
+            cmdShow: false,
             weatherShow: false,
             timer: '',
             activeNames: '',
@@ -79,7 +75,19 @@ export default {
             humidity: '--'
         }
     },
+
     methods: {
+        cmdCallback(commandLine, terminal, cancelToken, resolve) {
+            // terminal.writeLine(new Date().toString())  terminal.writeLine:display the string on cmd window
+            // cancelToken.onCancel(function() {  cancelToken.onCancel() : ctrl+c to break event handle
+            //     do sth...
+            //     resolve()
+            // })
+            // resolve() finish action
+
+            console.log('commandLine', commandLine)
+            cmdhandler.handler(commandLine, terminal, cancelToken, resolve, this)
+        },
         beforeDestroy() {
             if (this.timer) {
                 clearInterval(this.timer) // remove timer
@@ -116,7 +124,6 @@ export default {
 
             console.log('测试')
         },
-        getIp() {},
         loadStart() {
             this.showload = true
             let timerTask = setInterval(() => {
@@ -134,7 +141,9 @@ export default {
                 this.showUI()
             }, 1000)
         },
-        showUI() {},
+        showUI() {
+            this.cmdShow = true
+        },
         showFooter() {
             this.footerInfo = dateFormat(this.date)
             this.timer = setInterval(() => {
@@ -211,7 +220,18 @@ export default {
     justify-content: flex-end;
 }
 .cmd {
-    position: relative;
+    width: 889px;
+    height: 500px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0.8;
+    background: #000000;
 }
 .grid-content {
     border-radius: 4px;
