@@ -4,7 +4,7 @@ import Command from './command.js';
 
 const _defaultOptions = {
     contextExtensions: {},
-    builtInCommands: ['HELP', 'ECHO', 'CLS'],
+    builtInCommands: ['HELP', 'WELCOME', 'ECHO', 'CLS'],
     allowAbbreviations: true
 };
 
@@ -122,6 +122,23 @@ class Shell extends ShellBase {
                     }
                 },
                 description: 'Lists the available commands.'
+            });
+        }
+
+        if (this.options.builtInCommands.indexOf('WELCOME') > -1) {
+            this.addCommand({
+                name: 'WELCOME',
+                main: function () {
+                    this.terminal.writeLine('-------------------------------------------');
+                    this.terminal.writeLine('');
+                    this.terminal.writeLine('* * * * * * * W E L C O M E * * * * * * * *');
+                    this.terminal.writeLine('');
+                    this.terminal.writeLine('Version:1.00');
+                    this.terminal.writeLine('Loading...');
+                    this.terminal.writeLine('OK!');
+                    this.terminal.writeLine('-------------------------------------------');
+                },
+                description: 'Display the welcome info.'
             });
         }
 

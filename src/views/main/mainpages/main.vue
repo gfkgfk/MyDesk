@@ -1,6 +1,9 @@
 <template>
     <div class="main">
-        <cmd v-if="cmdShow" class="cmd"  @cmdCallback="cmdCallback"></cmd>
+        <transition name="el-zoom-in-center" v-on:after-enter="afterEnter">
+            <cmd ref="cmd" v-show="cmdShow" class="cmd" @cmdCallback="cmdCallback"></cmd>
+        </transition>
+
         <transition name="el-fade-in-linear">
             <div class="middle" v-if="showload">
                 <div class="progress-title fs20">Loading...</div>
@@ -77,6 +80,10 @@ export default {
     },
 
     methods: {
+        afterEnter() {
+            // after transition,to active cmd and fix cmd indicator display style
+            this.$refs.cmd.active()
+        },
         cmdCallback(commandLine, terminal, cancelToken, resolve) {
             // terminal.writeLine(new Date().toString())  terminal.writeLine:display the string on cmd window
             // cancelToken.onCancel(function() {  cancelToken.onCancel() : ctrl+c to break event handle

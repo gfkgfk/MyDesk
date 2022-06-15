@@ -4,6 +4,20 @@
 
 <script>
 export default {
+    data() {
+        return {
+            cmdr: '',
+            terminal: ''
+        }
+    },
+    methods: {
+        active() {
+            // active cmd and fix cmd indicator display style
+            this.terminal._activateInput()
+            //display welcome info
+            this.terminal.execute('WELCOME')
+        }
+    },
     props: {
         theme: {
             type: String,
@@ -11,23 +25,11 @@ export default {
         }
     },
     mounted() {
-        var cmdr = require('./cmdr/cmdr.js')
+        this.cmdr = require('./cmdr/cmdr.js')
         let node = document.getElementById('container')
-        var terminal = new cmdr.Terminal(node, { theme: 'custom' })
+        this.terminal = new this.cmdr.Terminal(node, { theme: 'custom' })
         let that = this
-        terminal.shell.addCommand({
-            name: 'HELP',
-            main: function() {
-                var terminal = this.terminal
-                var cancelToken = this.cancelToken
-                var commandLine = this.commandLine
-                return new Promise(function(resolve) {
-                    that.$emit('cmdCallback', commandLine, terminal, cancelToken, resolve)
-                })
-            },
-            description: 'show help info'
-        })
-        terminal.shell.addCommand({
+        this.terminal.shell.addCommand({
             name: 'LOGIN',
             main: function() {
                 var terminal = this.terminal
