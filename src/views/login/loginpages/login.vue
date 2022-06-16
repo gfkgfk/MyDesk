@@ -1,6 +1,7 @@
 <template>
     <div>
-       Login Page
+        <div>Login Page</div>
+       <button @click="test">Test</button>
     </div>
 </template>
 
@@ -9,9 +10,12 @@ import { mapActions, mapMutations } from 'vuex'
 import qs from 'qs'
 import _ from 'lodash'
 export default {
+    inject: ['reload'],
+    beforeDestroy () {
+      console.log('beforeDestory');  
+    },
     created() {},
     methods: {
-       
     }
 }
 </script>

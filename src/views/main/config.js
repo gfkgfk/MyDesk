@@ -9,19 +9,5 @@ export default {
                 component: resolve => require(['@/views/main/mainchildpages/mainchild'], resolve),
             }
         ]
-    },
-    urls: {
-        'main.getUserinfo': {
-            'type': 'POST',
-            'real': '/login',
-            'mock': '../../static/mock/login/user_login.json',
-            'apiPrefix': config.apiPrefix,
-        },
-        'info.getMessage': {
-            'type': 'POST',
-            'real': '/login',
-            'mock': '../../static/mock/login/user_login.json',
-            'apiPrefix': config.apiPrefix,
-        },
     }
 }

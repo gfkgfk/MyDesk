@@ -1,5 +1,5 @@
 <template>
-    <div id="container" class="cmd-container"></div>
+    <div id="cmdcontainer" class="cmd-container"></div>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
     },
     mounted() {
         this.cmdr = require('./cmdr/cmdr.js')
-        let node = document.getElementById('container')
+        let node = document.getElementById('cmdcontainer')
         this.terminal = new this.cmdr.Terminal(node, { theme: 'custom' })
         let that = this
         this.terminal.shell.addCommand({

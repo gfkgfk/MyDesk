@@ -1,5 +1,6 @@
 <template>
-    <div class="main">
+    <div id="main" class="main">
+        <digitalrain style="position: absolute;bottom:0;top:0;"></digitalrain>
         <transition name="el-zoom-in-center" v-on:after-enter="afterEnter">
             <cmd ref="cmd" v-show="cmdShow" class="cmd" @cmdCallback="cmdCallback"></cmd>
         </transition>
@@ -38,14 +39,16 @@
 </template>
 
 <script>
-import './js/digitalrain'
 import config from '@/userconfig'
 import cmd from '@/components/cmdr/cmdr'
+import digitalrain from '@/components/digitalrain/digitalrain'
 import cmdhandler from './js/cmdhandler'
 import { dateFormat } from '@/utils/utils'
 export default {
+    inject: ['reload'],
     components: {
-        cmd
+        cmd,
+        digitalrain
     },
     data() {
         return {
@@ -78,8 +81,17 @@ export default {
             humidity: '--'
         }
     },
+    beforeDestroy() {
+        console.log('beforeDestroy')
 
+        if (this.timer) {
+            clearInterval(this.timer) // remove timer
+        }
+    },
     methods: {
+        refresh() {
+            this.reload()
+        },
         afterEnter() {
             // after transition,to active cmd and fix cmd indicator display style
             this.$refs.cmd.active()
@@ -95,11 +107,7 @@ export default {
             console.log('commandLine', commandLine)
             cmdhandler.handler(commandLine, terminal, cancelToken, resolve, this)
         },
-        beforeDestroy() {
-            if (this.timer) {
-                clearInterval(this.timer) // remove timer
-            }
-        },
+
         handleChange(val) {
             console.log('handleChange', val)
         },
@@ -128,8 +136,6 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
-
-            console.log('测试')
         },
         loadStart() {
             this.showload = true
@@ -146,7 +152,7 @@ export default {
             this.showload = false
             setTimeout(() => {
                 this.showUI()
-            }, 1000)
+            }, 500)
         },
         showUI() {
             this.cmdShow = true
@@ -160,8 +166,6 @@ export default {
         }
     },
     created() {
-        //TODO:remove the element to avoid the effect of heart page(three.js)
-
         this.loadStart() // start loading progress
         this.showFooter() // start timer
         this.getWeather() // request the weather info
@@ -220,6 +224,8 @@ export default {
 }
 .footer {
     position: fixed;
+    padding: 5px 10px;
+    font-weight: 600;
     width: 100%;
     bottom: 0;
     right: 0;
