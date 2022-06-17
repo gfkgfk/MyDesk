@@ -1,7 +1,7 @@
 <template>
     <div class="console-container">
         <el-container class="container">
-            <el-aside class="left" style="width:auto">
+            <el-aside class="left" style="width:auto" >
                 <menuleft></menuleft>
             </el-aside>
             <el-container>
