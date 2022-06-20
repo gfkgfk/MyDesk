@@ -1,7 +1,7 @@
 <template>
     <div class="console-container">
         <el-container class="container">
-            <el-aside class="left" style="width:auto" >
+            <el-aside class="left" style="width:auto">
                 <menuleft></menuleft>
             </el-aside>
             <el-container>
@@ -24,18 +24,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .console-container {
     height: 100%;
 }
 .container {
     height: 100%;
 }
-.left {
-    // background-color: #545c64;
-    // color: #fff;
-}
-
 .el-header,
 .el-footer {
     background-color: #b3c0d1;
@@ -44,17 +39,19 @@ export default {
     line-height: 60px;
 }
 
-// .el-aside {
-//     background-color: #d3dce6;
-//     color: #333;
-//     text-align: center;
-//     line-height: 200px;
-// }
-
 .el-main {
     background-color: #e9eef3;
     color: #333;
     text-align: center;
     line-height: 160px;
+}
+
+html,
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 </style>
