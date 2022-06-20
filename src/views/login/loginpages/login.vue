@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>Login Page</div>
-       <button @click="test">Test</button>
+       <button >Test</button>
     </div>
 </template>
 
