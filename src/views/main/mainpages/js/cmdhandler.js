@@ -1,4 +1,4 @@
-function handler(commandLine,terminal,cancelToken,resolve,page) {
+function handler (commandLine, terminal, cancelToken, resolve, page) {
     switch (commandLine.toUpperCase()) {
         case 'HELP':
             terminal.writeLine('****help document****')
@@ -11,13 +11,23 @@ function handler(commandLine,terminal,cancelToken,resolve,page) {
             page.$router.push('/login');
             resolve();
             break;
+        case 'CONSOLE':
+            terminal.writeLine('console...')
+            page.$router.push('/console');
+            resolve();
+            break;
+        case 'DOWNLOAD':
+            terminal.writeLine('downloading...')
+            page.download()
+            resolve();
+            break;
         default:
             terminal.writeLine('unknown command')
             resolve();
             break;
     }
 }
-export default{
+export default {
     handler
 
 }

@@ -41,6 +41,32 @@ export default {
             },
             description: 'user login'
         })
+
+        this.terminal.shell.addCommand({
+            name: 'CONSOLE',
+            main: function() {
+                var terminal = this.terminal
+                var cancelToken = this.cancelToken
+                var commandLine = this.commandLine
+                return new Promise(function(resolve) {
+                    that.$emit('cmdCallback', commandLine, terminal, cancelToken, resolve)
+                })
+            },
+            description: 'go to console page'
+        })
+
+        this.terminal.shell.addCommand({
+            name: 'DOWNLOAD',
+            main: function() {
+                var terminal = this.terminal
+                var cancelToken = this.cancelToken
+                var commandLine = this.commandLine
+                return new Promise(function(resolve) {
+                    that.$emit('cmdCallback', commandLine, terminal, cancelToken, resolve)
+                })
+            },
+            description: 'download the specified file '
+        })
     }
 }
 </script>

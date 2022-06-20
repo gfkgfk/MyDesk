@@ -163,6 +163,11 @@ export default {
                 this.date = new Date()
                 this.footerInfo = dateFormat(this.date)
             }, 1000)
+        },
+        download() {
+            let a = document.createElement('a')
+            a.href = '/static/download/watch.7z'
+            a.click()
         }
     },
     created() {
