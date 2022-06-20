@@ -5,8 +5,10 @@
                 <menuleft></menuleft>
             </el-aside>
             <el-container>
-                <el-header>Header</el-header>
-                <el-main>
+                <el-header style="padding:0px">
+                    <topHead></topHead>
+                </el-header>
+                <el-main style="line-height:0px">
                     <router-view></router-view>
                 </el-main>
                 <el-footer>Footer</el-footer>
@@ -17,9 +19,13 @@
 
 <script>
 import menuleft from '@/components/menuleft/menuleft'
+import topHead from '@/components/header/header'
 export default {
+  created () {
+  },
     components: {
-        menuleft
+        menuleft,
+        topHead
     }
 }
 </script>
@@ -31,7 +37,6 @@ export default {
 .container {
     height: 100%;
 }
-.el-header,
 .el-footer {
     background-color: #b3c0d1;
     color: #333;
