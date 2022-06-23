@@ -131,7 +131,12 @@ class Shell extends ShellBase {
                 main: function () {
                     this.terminal.writeLine('-------------------------------------------');
                     this.terminal.writeLine('');
-                    this.terminal.writeLine('* * * * * * * W E L C O M E * * * * * * * *');
+                    this.terminal.writeLine('               .__                               ');
+                    this.terminal.writeLine('__  _  __ ____ |  |   ____  ____   _____   ____  ');
+                    this.terminal.writeLine('\ \/ \/ // __ \|  | _/ ___\/  _ \ /     \_/ __ \ ');
+                    this.terminal.writeLine(' \     /\  ___/|  |_\  \__(  <_> )  Y Y  \  ___/ ');
+                    this.terminal.writeLine('  \/\_/  \___  >____/\___  >____/|__|_|  /\___  >');
+                    this.terminal.writeLine('             \/          \/            \/     \/ ');
                     this.terminal.writeLine('');
                     this.terminal.writeLine('Version:1.00');
                     this.terminal.writeLine('Loading...');
