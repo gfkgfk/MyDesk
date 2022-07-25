@@ -76,6 +76,12 @@ mockjs -- finished
 vuex --1.save token --finished.
 ui -- element ui
 lodash -- finished
+change to history mode(vue router)
+add font-awesome
+add route guards
+change to muti page application
+upgrade to cli3
+add deep clone utils tool
 
 ```
 
